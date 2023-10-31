@@ -1,2 +1,0 @@
-natsort==6.0.0
-fastnumbers==2.2.1

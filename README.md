@@ -4,11 +4,16 @@
 
 ## Overview
 
-Match CPEs between them.
+Match and compare CPEs.
 
 ## Installation / Usage
 
 To install use pip:
 
-    $ pip install cpematcher
+    $ pip install cpematcher-ng
 
+
+
+# Origin
+
+The project was forked from [cpematcher](https://github.com/alertot/cpematcher). Kudos to the original author!
