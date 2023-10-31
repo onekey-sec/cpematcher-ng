@@ -66,7 +66,7 @@ class CPE:
         self.version_end_including = Version(version_end_including)
         self.version_end_excluding = Version(version_end_excluding)
 
-    def matches(self, another_cpe):
+    def matches(self, another_cpe):  # noqa: C901
         """Verify if `another_cpe` matches, first through field comparison and
         then using the border constraints.
 
@@ -131,7 +131,7 @@ class CPEOperation:
 
     def _get_value(self, cpe_dict, key):
         for k in self.VERSION_MAP[key]:
-            if k in cpe_dict.keys():
+            if k in cpe_dict:
                 return cpe_dict[k]
 
         return None
