@@ -41,7 +41,7 @@ class CPE:
         version_end_including=None,
         version_end_excluding=None,
     ):
-        """ Create CPE object with information about affected software.
+        """Create CPE object with information about affected software.
 
         Usually CPE is used to find out if a version is vulnerable,
         but it's also used to test if a version is not vulnerable,
@@ -67,7 +67,7 @@ class CPE:
         self.version_end_excluding = Version(version_end_excluding)
 
     def matches(self, another_cpe):
-        """ Verify if `another_cpe` matches, first through field comparison and
+        """Verify if `another_cpe` matches, first through field comparison and
         then using the border constraints.
 
         """
@@ -115,7 +115,7 @@ class CPE:
 
 
 class CPEOperation:
-    """ Handle operations defined on CPE sets.
+    """Handle operations defined on CPE sets.
 
     Support for:
         - OR operations
@@ -155,7 +155,7 @@ class CPEOperation:
                 self.cpes.add(c)
 
     def matches(self, another_cpe):
-        """ Return matching CPE object. """
+        """Return matching CPE object."""
         for cpe in self.cpes:
             if cpe.matches(another_cpe):
                 return cpe
