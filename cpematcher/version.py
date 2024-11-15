@@ -1,8 +1,10 @@
+from typing import Optional
+
 from natsort import natsorted
 
 
 class Version:
-    def __init__(self, version):
+    def __init__(self, version: Optional[str]):
         self.version = version
 
     def __bool__(self):
