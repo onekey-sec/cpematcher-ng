@@ -33,10 +33,8 @@ nosetests.xml
 output/*.html
 output/*/index.html
 
-# Sphinx
-docs/_build
+.devenv*
+devenv.local.nix
 
-# Cookiecutter
-output/
-.pytest_cache/
-dist/
+.direnv
+.pre-commit-config.yaml
