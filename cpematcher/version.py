@@ -5,7 +5,7 @@ from natsort import natsorted
 
 class Version:
     def __init__(self, version: Optional[str]):
-        self.version = version
+        self.version = version and version.lower()
 
     def __bool__(self):
         return bool(self.version)
