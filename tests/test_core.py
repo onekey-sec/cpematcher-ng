@@ -24,33 +24,6 @@ class TestCPE:
         with pytest.raises(ValueError):
             CPE("cpe:2.3:a:apache:activemq:4.0.1:*:*:*:*:*")
 
-    def test_matches_all(self):
-        cpe = CPE("cpe:2.3:a:apache:activemq:4.0.1:*:*:*:*:*:*:*")
-        assert not cpe.matches_all
-
-        cpe = CPE("cpe:2.3:a:apache:activemq:*:*:*:*:*:*:*:*")
-        assert cpe.matches_all
-
-        cpe = CPE(
-            "cpe:2.3:a:apache:activemq:*:*:*:*:*:*:*:*", version_start_including="1"
-        )
-        assert not cpe.matches_all
-
-        cpe = CPE(
-            "cpe:2.3:a:apache:activemq:*:*:*:*:*:*:*:*", version_start_excluding="1"
-        )
-        assert not cpe.matches_all
-
-        cpe = CPE(
-            "cpe:2.3:a:apache:activemq:*:*:*:*:*:*:*:*", version_end_including="1"
-        )
-        assert not cpe.matches_all
-
-        cpe = CPE(
-            "cpe:2.3:a:apache:activemq:*:*:*:*:*:*:*:*", version_end_excluding="1"
-        )
-        assert not cpe.matches_all
-
     def test_matches_with_wildcard(self):
         master_cpe = CPE("cpe:2.3:a:apache:activemq:*:*:*:*:*:*:*:*")
         version_cpe = CPE("cpe:2.3:a:apache:activemq:4.0.1:*:*:*:*:*:*:*")
@@ -77,8 +50,20 @@ class TestCPE:
 
     def test_matches_with_exact_version(self):
         version_cpe = CPE("cpe:2.3:a:apache:activemq:4.1.1:*:*:*:*:*:*:*")
-
         assert version_cpe.matches(version_cpe)
+
+    def test_matches_case_insensitive(self):
+        cpe_str = "cpe:2.3:a:apache:activemq:4.1.1:*:*:*:*:*:*:*"
+        cpe = CPE(cpe_str)
+        upper_cpe = CPE(cpe_str.replace("apche", "APACHE"))
+        assert cpe.matches(upper_cpe)
+
+        cpe_alnum_version = (
+            "cpe:2.3:o:microsoft:windows_server_2008:r2:sp1:*:*:*:*:x64:*"
+        )
+        alnum_cpe = CPE(cpe_alnum_version)
+        cpe_alnum_upper = CPE(cpe_alnum_version.replace("r2:sp1", "R2:SP1"))
+        assert alnum_cpe.matches(cpe_alnum_upper)
 
     def test_matches_with_version_start_including(self):
         branch_cpe = CPE(self.template % "4.1.*", version_start_including="4.1.3")

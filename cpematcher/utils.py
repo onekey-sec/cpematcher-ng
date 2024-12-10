@@ -1,8 +1,9 @@
 import contextlib
+from typing import List
 
 
 # heavily inspired by https://stackoverflow.com/a/21882672
-def split_cpe_string(string):
+def split_cpe_string(string: str) -> List[str]:
     ret = []
     current = []
     itr = iter(string)
